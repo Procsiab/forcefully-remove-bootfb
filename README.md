@@ -55,8 +55,20 @@ sudo make install
 # Run
 
 Run as root from the bash script with the following command:
+
+- To use the locally built module from the `build` folder, run
 ```bash
 sudo ./remove.sh
+```
+
+- To use the DKMS built kernel module, run
+```bash
+sudo ./remove-with-dkms.sh
+```
+
+- To unbind any framebuffer device that might be active, run
+```bash
+sudo ./remove-all-fb.sh
 ```
 
 **NOTE**: After every reboot, the script `remove.sh` should be run again to unmap the memory region reserved by `simplefb`.
