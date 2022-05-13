@@ -1,0 +1,10 @@
+Description=Run the BOOTFB memory unmap script
+DefaultDependencies=no
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c "/usr/local/bin/bootfb-unmap.sh"
+
+[Install]
+WantedBy=multi-user.target

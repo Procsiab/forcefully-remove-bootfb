@@ -54,6 +54,8 @@ sudo make install
 
 # Run
 
+## Manually
+
 Run as root from the bash script with the following command:
 
 - To use the locally built module from the `build` folder, run
@@ -72,6 +74,18 @@ sudo ./remove-all-fb.sh
 ```
 
 **NOTE**: After every reboot, the script `remove.sh` should be run again to unmap the memory region reserved by `simplefb`.
+
+## Automatically (SystemD and DKMS)
+
+Install the `.service` unit file and the soft link with the following commands:
+```bash
+ln -s $(pwd)/remove-with-dkms.sh /usr/local/bin/bootfb-unmap.sh
+cp bootfb-unmap.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable bootfb-unmap.service
+```
+
+At each reboot, the script which uses the DKMS module will run automatically.
 
 # Source
 
