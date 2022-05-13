@@ -13,3 +13,6 @@ $(BUILD_DIR_MAKEFILE): $(BUILD_DIR)
 
 clean:
 	make -C $(KDIR) M=$(BUILD_DIR) src=$(PWD) clean
+
+install:
+	make -C $(KDIR) M=$(BUILD_DIR) modules_install

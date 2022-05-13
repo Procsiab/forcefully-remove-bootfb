@@ -10,4 +10,4 @@ end=${ADDR[1]}
 sleep 2
 
 insmod build/force-remove-bootfb.ko bootfb_start=0x${start} bootfb_end=0x${end}
-rmmod force-remove-bootfb
+rmmod build/force-remove-bootfb
