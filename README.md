@@ -30,7 +30,7 @@ grub2-mkconfig -o /etc/grub2-efi.cfg
 ## Dependencies (CentOS/Fedora)
 
 ```bash
-sudo dnf install -y kernel-devel kernel-headers
+sudo dnf install -y kernel-devel kernel-headers dkms
 ```
 
 ## Compile (CentOS/Fedora)
@@ -46,10 +46,32 @@ sudo ln -s /usr/src/kernels/$(uname -r)/ /lib/modules/$(uname -r)/build
 sudo make
 ```
 
-## Install with DKMS
+3. Install the module to be able to use it with `modprobe`
 
 ```bash
 sudo make install
+```
+
+## Automatic recompile with DKMS
+
+Run the following commands from this repository's root folder:
+
+```bash
+sudo dkms add $(pwd)
+sudo dkms build -m force-remove-bootfb -v 0.0.1
+sudo dkms install -m force-remove-bootfb -v 0.0.1
+```
+
+Check that the module is correctly installed by running the following:
+
+```bash
+dkms status | grep force-remove-bootfb
+```
+
+If you see an output similar to this, then DKMS will take care of recompiling that module for the next different kernel you will install on your system
+
+```
+force-remove-bootfb/0.0.1, ... x86_64: installed (original_module exists)
 ```
 
 # Run
