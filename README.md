@@ -1,5 +1,16 @@
 # Forcibly unmap BOOTFB memory
 
+### ⚠️  UPDATE 07/2022 ⚠️
+
+From [this](https://forum.proxmox.com/threads/problem-with-gpu-passthrough.55918/post-478351) post on the Proxmox Forum, and by my own testing on the standard Linux kernel `5.18.3`, it is possible to avoid the mapping of the BOOTFB memory region by adding the following argument to the boot command line:
+```
+initcall_blacklist=sysfb_init
+```
+
+Therefore, you have no need to compile and use the kernel module in this repo!
+
+---
+
 This repo will let you compile a kernel module to unmap the memory reserved by the `simple-framebuffer` device.
 
 To ensure that `simplefb` wil not access that memory afterwards, add the following parameter to your command line inside your bootloader:
